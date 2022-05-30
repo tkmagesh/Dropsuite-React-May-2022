@@ -24,3 +24,12 @@ Problem
         2. The production deployment team will take care of prepare the code for production
             Create .js files
             Create .css files
+
+Incremental
+    Create the DOM once
+    Manipulate the created DOM everytime the model changes
+    May become more imperative
+
+All in One
+    Create a new DOM fragment everytime the model changes with the current state of the model
+    Can be more declarative
