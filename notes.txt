@@ -1,0 +1,26 @@
+Magesh Kuppan
+
+Software Requirements
+    Node.js (LTS)
+    Chrome Browser
+    Visual Studio Code
+
+What is React?
+    React is a library for building RIA / SPA
+
+Problem
+    Salary Calculator
+        Basic
+        HRA
+        DA
+        Tax (%)
+
+        Salary = Basic + HRA + DA - Tax(%)
+
+    Assumptions
+        1. App meets 100% expectations of the client
+            No need for validations
+            No need for error messages
+        2. The production deployment team will take care of prepare the code for production
+            Create .js files
+            Create .css files
