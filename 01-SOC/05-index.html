@@ -26,7 +26,19 @@
         //State & Behavior of a Calculator
         function SalaryCalculatorModel(){
             //state
-            this.basic = 0;
+            //this.basic = 0;
+            var _basic = 0;
+            this.onBasicChange = null;
+            this.getBasic = function(){
+                return _basic;
+            };
+            this.setBasic = function(val){
+                if (val === _basic) return;
+                _basic = val;
+                if (typeof this.onBasicChange === 'function')
+                    this.onBasicChange();
+            };
+
             this.hra = 0;
             this.da = 0;
             this.tax = 0;
@@ -35,7 +47,7 @@
             this.onSalaryChange = null;
         }
         SalaryCalculatorModel.prototype.calculate = function(){
-            var gross = this.basic + this.hra + this.da,
+            var gross = this.getBasic() + this.hra + this.da,
                 net = gross * ((100-this.tax)/100);
             this.salary = net;
             if (typeof this.onSalaryChange === 'function')
@@ -49,7 +61,7 @@
 
             //Reacting to user actions
             $('#txtBasic').on('change', function(){
-                model.basic = parseInt($(this).val());
+                model.setBasic(parseInt($(this).val()));
             });
 
             $('#txtHra').on('change', function(){
@@ -68,7 +80,7 @@
             $('#btnCalculate').click(function(){
                 
                 model.calculate();
-                $('#tdBasic').text(model.basic);
+                
                 $('#tdHra').text(model.hra);
                 $('#tdDa').text(model.da);
                 $('#tdTax').text(model.tax);
@@ -78,11 +90,15 @@
             model.onSalaryChange = function(){
                  $('#tdSalary').text(model.salary);
             };
+
+            model.onBasicChange = function(){
+                $('#tdBasic').text(model.getBasic());
+            };
         });
     </script>
 </head>
 <body>
-    <h1>Salary Calculator (v4)</h1>
+    <h1>Salary Calculator (v5)</h1>
     <hr>
     <section>
         <div class="field">
