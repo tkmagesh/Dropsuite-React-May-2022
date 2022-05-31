@@ -63,3 +63,8 @@ Component
     Represents a single UI responsibility that can be reused
     Encapsulates Presentation + UI Behavior + State
     Can be created as a 'Class' / 'function'
+
+Assignment:
+    Modify the 06-products.html file to do the following
+        1. should be able to add new products dynamically
+        2. should be able to remove added products
