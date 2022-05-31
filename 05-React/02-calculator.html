@@ -10,30 +10,42 @@
     <script src="babel.min.js"></script>
     <script type="text/babel">
 
-        class Calculator /*  */ {
-            /*  */
+        class Calculator extends React.Component {
+            state = {
+                n1 : 0,
+                n2 : 0,
+                result : 0
+            }
+            render(){
+                const { n1, n2, result } = this.state;
+                return(
+                     <div>
+                        <h1>Calculator</h1>
+                        <label htmlFor="">Number 1 : </label>
+                        <input type="number" onChange={ evt => this.setState({n1 : parseInt(evt.target.value)})} />
+                        <br />
+                        <label htmlFor="">Number 2 : </label>
+                        <input type="number" onChange={ evt => this.setState({n2 : parseInt(evt.target.value)})} />
+                        <br />
+                        <button onClick={ () => this.setState({result : n1 + n2})}>Add</button>
+                        <button onClick={ () => this.setState({result : n1 - n2})}>Subtract</button>
+                        <button onClick={ () => this.setState({result : n1 * n2})}>Multiply</button>
+                        <button onClick={ () => this.setState({result : n1 /n2})}>Divide</button>
+                        <div>{this.state.result}</div>
+                    </div>
+                )
+            }
+            
         }
 
+        ReactDOM.render(<Calculator/>, document.getElementById('root'))
         
     </script>
     
 </head>
 <body>
     <div id="root">
-        <div>
-            <h1>Calculator</h1>
-            <label for="">Number 1 : </label>
-            <input type="number" name="" id="">
-            <br>
-            <label for="">Number 2 : </label>
-            <input type="number" name="" id="">
-            <br>
-            <button>Add</button>
-            <button>Subtract</button>
-            <button>Multiply</button>
-            <button>Divide</button>
-            <div>[Result]</div>
-        </div>
+       
     </div>
 </body>
 </html>
