@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React - Compnents</title>
+    <style>
+        .highlight{
+            color : blue;
+        }
+    </style>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    
+    <script type="text/babel">
+        class Greeter extends React.Component{
+
+            /* State */
+            state = {
+                greetMsg : '[Default greet message]',
+                userName : ''
+            };
+            
+            /* UI Behavior */
+            onBtnGreetClick = () => {
+                let msg = `Hi ${this.state.userName}, Have a nice day!`;
+                this.setState({
+                    greetMsg : msg
+                }, () => {
+                    console.log('this.state.greetMsg => ', this.state.greetMsg);
+                });
+            };
+
+            onTxtUserNameChange = (evt) => {
+                this.setState({
+                    userName : evt.target.value
+                })                
+            }
+
+            /* Presentation */
+            render(){
+                return (
+                    <div>
+                        <h1>Greeter</h1>
+                        <hr/>
+                        <label htmlFor="">User Name :</label>
+                        <input type="text" onChange={this.onTxtUserNameChange}/>
+                        <span>[ {this.state.userName.length} ]</span>
+                        <button onClick={this.onBtnGreetClick}>Greet</button>
+                        <div className="highlight">{this.state.greetMsg}</div>
+                    </div>
+                );
+            }
+        }
+
+        /* ReactDOM.render(React.createElement(Greeter), document.getElementById('root')); */
+        ReactDOM.render(<Greeter/>, document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+</html>

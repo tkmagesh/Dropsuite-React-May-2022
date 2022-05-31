@@ -48,11 +48,6 @@ JSX & HTML
     * "class" attribute is allowed in HTML
       use "className" in place of "class" in JSX
 
-Component
-    Represents a single UI responsibility that can be reused
-    Encapsulates Presentation + UI Behavior + State
-    Can be created as a 'Class' / 'function'
-
 Approach
     - Replace JS with a new language
         ex Google Dart
@@ -63,3 +58,8 @@ Approach
 
     - Add more features to JS
         - ES6
+
+Component
+    Represents a single UI responsibility that can be reused
+    Encapsulates Presentation + UI Behavior + State
+    Can be created as a 'Class' / 'function'
