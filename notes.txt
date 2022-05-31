@@ -33,3 +33,33 @@ Incremental
 All in One
     Create a new DOM fragment everytime the model changes with the current state of the model
     Can be more declarative
+
+Babel
+    Transpiler
+    ES6 to ES5
+
+JSX & HTML
+    * Open tags without closed tags are allowed in HTML
+      Every open tag must have a corresponding close tag in JSX
+
+    * "for" attribute is allowed in HTML
+      use "htmlFor" in place of "for" in JSX
+
+    * "class" attribute is allowed in HTML
+      use "className" in place of "class" in JSX
+
+Component
+    Represents a single UI responsibility that can be reused
+    Encapsulates Presentation + UI Behavior + State
+    Can be created as a 'Class' / 'function'
+
+Approach
+    - Replace JS with a new language
+        ex Google Dart
+
+    - Create compilers for other high level languages that will compile to JS
+        CoffeeScript
+        TypeScript
+
+    - Add more features to JS
+        - ES6
