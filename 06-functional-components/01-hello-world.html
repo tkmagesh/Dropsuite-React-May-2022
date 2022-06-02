@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script type="text/babel">
+        /* 
+        class HelloWorld extends React.Component{
+            render(){
+                return(
+                    <h1>Hello World!</h1>
+                )
+            }
+        } 
+        */
+
+        /* 
+        function HelloWorld() {
+            return (
+                <h1>Hello World (functional)!</h1>
+            )
+        } 
+        */
+
+        /* 
+        const HelloWorld = function() {
+            return (
+                <h1>Hello World (functional [2])!</h1>
+            )
+        } 
+        */
+
+        /* 
+        const HelloWorld =  () => {
+            return (
+                <h1>Hello World (functional [3])!</h1>
+            )
+        } 
+        */
+
+       /* 
+        const HelloWorld = (props) => {
+            return (
+                <div>
+                    <h1>Hello World (functional [4])!</h1>
+                    <p>{props.msg}</p>
+                </div>
+            )
+        } 
+        */
+
+         const HelloWorld = (props) => {
+            console.log(props);
+            const { msg, children } = props;
+            return (
+                <div>
+                    <h1>Hello World (functional [4])!</h1>
+                    <p>{msg}</p>
+                    {children}
+                </div>
+            )
+        }
+            
+
+        ReactDOM.render(
+            <HelloWorld msg="Have a good day!">
+                <div>
+                    <p>Ut fugiat ipsum ex Lorem commodo velit dolore elit. Tempor est id voluptate do qui ullamco occaecat cillum adipisicing duis amet esse deserunt. Cillum consectetur voluptate commodo eiusmod elit anim.</p>
+                    <p>Labore irure aute sit ea amet et sint cillum sit laborum dolor anim aliqua in. Sunt ipsum velit do velit velit laborum mollit est. Culpa id Lorem ad exercitation.</p>
+                </div>
+            </HelloWorld>
+        , document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
