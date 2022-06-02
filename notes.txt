@@ -68,3 +68,8 @@ Assignment:
     Modify the 06-products.html file to do the following
         1. should be able to add new products dynamically
         2. should be able to remove added products
+
+
+Class Component Overheads
+    1. For every usage of a component, a new instance of the component class has to be created
+    2. The life cycle events are executed for every component even when they are not subscribed

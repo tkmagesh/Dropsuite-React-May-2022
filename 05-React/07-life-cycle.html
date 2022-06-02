@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Life Cycle</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script type="text/babel">
+        class Spinner extends React.Component{
+
+            state = {
+                count : 0
+            };
+
+            componentWillMount(){
+                console.log('componentWillMount triggered')
+            }
+
+            componentDidMount(){
+                console.log('componentDidMount triggered')
+            }
+
+            shouldComponentUpdate(prevProps, prevState){
+
+                console.log('shouldComponentUpdate triggered with prevState = ', prevState, ' and prevProps = ', prevProps);
+                return true;
+            }
+
+            componentWillUnmount(){
+                 console.log('componentWillUnmount triggered')
+            }
+
+            render(){
+                console.log('render triggered')
+                return(
+                    <div>
+                    <h3>Spinner</h3>
+                    <button onClick={ () => this.setState({count : this.state.count + 1})}> Increment </button>
+                    <div>{this.state.count}</div>
+                    </div>
+                )
+            }
+
+        }
+
+        class App extends React.Component{
+            state = {
+                showTimer : false
+            };
+            render(){
+                return (
+                    <div>
+                        <h1>App</h1>
+                        <label> Show Timer : </label>
+                        <input 
+                            type="checkbox" 
+                            checked={this.state.showTimer} 
+                            onChange={ evt => this.setState({showTimer : evt.target.checked})}
+                        />
+                        { this.state.showTimer ? <Timer/> : null }
+                    </div>
+                );
+            }
+        }
+
+        class Timer extends React.Component{
+            state = {
+                currentTime : Date()
+            };
+            timerId = 0;
+            componentDidMount(){
+                this.timerId = setInterval(() => {
+                    console.log('timerId = ', this.timerId, ' triggered')
+                    this.setState({
+                        currentTime : Date()
+                    })
+                },1000);
+                console.log('timerId = ', this.timerId)
+            }
+            componentWillUnmount(){
+                clearInterval(this.timerId)
+            }
+            render(){
+                return(
+                    <h3>Time : {this.state.currentTime}</h3>
+                )
+            }
+        }
+
+        ReactDOM.render(<App/>, document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+</body>
+</html>
