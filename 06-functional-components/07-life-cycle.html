@@ -26,7 +26,7 @@
             );
         }
 
-        const Timer = () => {
+        const useTimer = () => {
             const [currentTime, setCurrentTime] = React.useState(Date())
             React.useEffect(() => {
                 console.log('timer initialized')
@@ -38,6 +38,11 @@
                     clearInterval(timerId)
                 }
             }, [])
+            return currentTime;
+        }
+
+        const Timer = () => {
+            const currentTime = useTimer()
             return (
                 <h3>Time : {currentTime}</h3>
             )
