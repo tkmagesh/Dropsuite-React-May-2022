@@ -11,10 +11,15 @@
     <script type="text/babel">
         const Spinner  = () => {
             const [count, setCount] = React.useState(50)
+            console.log(setCount)
+            const onIncrementClick = () => {
+                setCount(count + 1)
+                console.log(count);
+            }
             return (
                 <div>
                     <h3>Spinner</h3>
-                    <button onClick={() => setCount(count + 1)}> Increment </button>
+                    <button onClick={onIncrementClick}> Increment </button>
                     <div>{count}</div>
                 </div>
             )
