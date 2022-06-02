@@ -73,3 +73,26 @@ Assignment:
 Class Component Overheads
     1. For every usage of a component, a new instance of the component class has to be created
     2. The life cycle events are executed for every component even when they are not subscribed
+
+
+React Hooks
+    functions that handle the side effects of a functional component
+    Can be used ONLY in a functional component
+    hook function names must start with the word 'use'
+    Built in hooks
+        useState
+        useEffect
+        useContext
+        useReducer
+        useCallback
+        useMemo
+        useRef
+        useImperativeHandle
+        useLayoutEffect
+        useDebugValue
+
+Side Effects 
+    - things that prevent a function from becoming a 'pure function'
+
+Pure Function
+    Function whose invocation can be replaced with the result of the function without affecting the final outcome
