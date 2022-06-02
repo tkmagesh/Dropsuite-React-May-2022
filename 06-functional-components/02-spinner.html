@@ -11,13 +11,23 @@
     <script type="text/babel">
         const Spinner  = () => {
             const [count, setCount] = React.useState(50)
-            
+            /* 
+            React.useEffect(() => { //this function is executed whenever the component is initialized / updated
+                    console.log('Spinner initialized / updated')
+                    console.log('count = ', count);
+
+                    return () => {
+                        //this function will be executed when the component is unmounted
+                    }
+                }, [count] //=> list the dependencies when changed we want the function to execute
+            ) 
+            */
             const onIncrementClick = () => {
                 setCount(count + 1)
             }
 
             const onDecrementClick = () => {
-                setCount(count + 1)
+                setCount(count - 1)
             }
 
             return (

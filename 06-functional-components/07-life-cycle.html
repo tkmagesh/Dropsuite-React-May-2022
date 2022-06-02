@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Life Cycle</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script type="text/babel">
+       
+       const App = () => {
+           const [showTimer, setShowTimer] = React.useState(true)
+            return (
+                <div>
+                    <h1>App</h1>
+                    <label> Show Timer : </label>
+                    <input
+                        type="checkbox"
+                        checked={showTimer}
+                        onChange={evt => setShowTimer(evt.target.checked)}
+                    />
+                    {showTimer ? <Timer /> : null}
+                </div>
+            );
+        }
+
+        const Timer = () => {
+            const [currentTime, setCurrentTime] = React.useState(Date())
+            React.useEffect(() => {
+                console.log('timer initialized')
+                const timerId = setInterval(() => {
+                    setCurrentTime(Date())
+                }, 1000);
+                return () => {
+                    console.log('timer stoped')
+                    clearInterval(timerId)
+                }
+            }, [])
+            return (
+                <h3>Time : {currentTime}</h3>
+            )
+        }
+
+        ReactDOM.render(<App/>, document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+</body>
+</html>
