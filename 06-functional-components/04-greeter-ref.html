@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React - Compnents</title>
+    <style>
+        .highlight{
+            color : blue;
+        }
+    </style>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    
+    <script type="text/babel">
+       
+
+        const Greeter = () => {
+            const [greetMsg, setGreetMsg ] = React.useState('[Default greet message]')
+            const txtUserNameRef = React.useRef();
+
+            const onBtnGreetClick = () => {
+                const userName = txtUserNameRef.current.value;
+                let msg = `Hi ${userName}, Have a nice day!`;
+                setGreetMsg(msg)
+            }
+            return (
+                <div>
+                    <h1>Greeter</h1>
+                    <hr />
+                    <label htmlFor="">User Name :</label>
+                    <input type="text" ref={txtUserNameRef} />
+                    <button onClick={onBtnGreetClick}>Greet</button>
+                    <div className="highlight">{greetMsg}</div>
+                </div>
+            );
+        }
+
+        /* ReactDOM.render(React.createElement(Greeter), document.getElementById('root')); */
+        ReactDOM.render(<Greeter/>, document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+</html>
