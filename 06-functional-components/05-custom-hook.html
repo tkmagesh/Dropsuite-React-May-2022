@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script type="text/babel">
+        function useCounter(initialValue){
+            const [count, setCount] = React.useState(initialValue);
+            const increment = (delta) => {
+                setCount(count + delta)
+            };
+            const decrement = (delta) => {
+                 setCount(count - delta)
+            }
+            return [count, increment, decrement];
+        }
+
+        const Spinner  = () => {
+           const [count, increment, decrement] = useCounter(0);
+           const [delta, setDelta] = React.useState(0)
+            return (
+                <div>
+                    <h3>Spinner</h3>
+                    <label>Delta : </label>
+                    <input type="number" onChange={ evt => setDelta(parseInt(evt.target.value))} />
+                    <br/>
+                    <button onClick={() => decrement(delta)}> Decrement </button>
+                    <span> [ {count} ] </span>
+                    <button onClick={() => increment(delta)}> Increment </button>
+                </div>
+            )
+        }
+
+            
+
+        ReactDOM.render(
+            <Spinner/>
+        , document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
