@@ -88,15 +88,13 @@
                         labelText="DA :"
                         onValueChange={val => model.set('da', val)}
                     />
-                    <div className="field">
-                        <label htmlFor="">Tax :</label>
-                        <input
-                            type="range"
-                            onChange={evt => model.set('tax', parseInt(evt.target.value))}
-                            min="0" max="30"
-                            value={model.get('tax')}
-                        /> 
-                    </div>
+                    <SalaryCalculatorInput
+                        labelText="Tax :"
+                        onValueChange={val => model.set('tax', val)}
+                        type="range"
+                        min="0" max="30"
+                        value={model.get('tax')}
+                    />
                     <div className="field">
                         <button onClick={() => model.calculate()}>Calculate</button>
                     </div>
@@ -107,11 +105,15 @@
             )
         }
 
-        const SalaryCalculatorInput = ({labelText, onValueChange}) => {
+        const SalaryCalculatorInput = ({labelText, onValueChange, type = "number", ...restProps}) => {
             return(
                 <div className="field">
                     <label htmlFor="">{labelText}</label>
-                    <input type="number" onChange={evt => onValueChange(parseInt(evt.target.value))} />
+                    <input 
+                        type={type} 
+                        onChange={evt => onValueChange(parseInt(evt.target.value))} 
+                        {...restProps}
+                    />
                 </div>
             )
         }
