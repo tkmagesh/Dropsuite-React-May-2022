@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script type="text/babel">
+
+        function spinnerReducer(currentState, action){
+            if (action === 'INCREMENT'){
+                return currentState + 1;
+            }
+            if (action === 'DECREMENT'){
+                return currentState - 1;
+            }
+            return currentState;
+        }
+
+        const Spinner  = () => {
+            const [ count, dispatch] = React.useReducer(spinnerReducer, 100)
+            const onDecrementClick = () => {
+                dispatch('DECREMENT');
+            };
+            const onIncrementClick = () => {
+                dispatch('INCREMENT');
+            };
+            return (
+                <div>
+                    <h3>Spinner</h3>
+                    <button onClick={onDecrementClick}> Decrement </button>
+                    <div>{count}</div>
+                    <button onClick={onIncrementClick}> Increment </button>
+                </div>
+            )
+        }
+
+            
+
+        ReactDOM.render(
+            <Spinner/>
+        , document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
