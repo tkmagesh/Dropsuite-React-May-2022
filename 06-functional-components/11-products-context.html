@@ -10,28 +10,43 @@
     <script src="react-dom.development.js"></script>
     <script type="text/babel">
         
+        const ProductsContext = React.createContext();
 
-        const Products = ({onListChange}) => {
-            const [productNames, setProductNames] = React.useState([]);
+         const App = () => {
+            const [productNames, setProductNames] = React.useState(['Pen', 'Pencil', 'Marker', 'Scribble-Pad'])
+
+            const addNew = (newProductName) => {
+                setProductNames([...productNames, newProductName])
+            };
+
+            const remove = (productToRemove) => {
+                setProductNames(productNames.filter(pn => pn !== productToRemove))
+            };
+
+            const contextValue = { productNames, addNew, remove };
+
+            return (
+                <ProductsContext.Provider value={contextValue}>
+                    <div>
+                        <ProductsCount  />
+                        <Products />
+                    </div>
+                </ProductsContext.Provider>
+            )
+        }
+        const Products = () => {
+           
             const [newProductName, setNewProductName] = React.useState('');
-            const onBtnAddNewClick = () => {
-                const updatedProducts = [...productNames, newProductName]
-                setProductNames(updatedProducts);
-                onListChange(updatedProducts);
-            };
 
-            const onBtnRemoveClick = (productNameToRemove) => {
-                const updatedProducts = productNames.filter(pn => pn !== productNameToRemove)
-                setProductNames(updatedProducts)
-                onListChange(updatedProducts)
-            };
-
+            const { productNames, addNew, remove } = React.useContext(ProductsContext);
+           
             const productItems = productNames.map((productName, index) => (
                 <li key={index}>
                     <span>{productName}</span>
-                    <span> [<button onClick={() => onBtnRemoveClick(productName)}> X </button>] </span>
+                    <span> [<button onClick={() => remove(productName)}> X </button>] </span>
                 </li>)
             );
+            
             return (
                 <div>
                     
@@ -40,7 +55,7 @@
                         type="text"
                         value={newProductName}
                         onChange={evt => setNewProductName(evt.target.value) } />
-                    <button onClick={onBtnAddNewClick}>Add New</button>
+                    <button onClick={() => addNew(newProductName)}>Add New</button>
                     <ul>
                         {productItems}
                     </ul>
@@ -48,7 +63,8 @@
             )
         }
 
-        const ProductsCount = ({count}) => {
+        const ProductsCount = () => {
+            const count = React.useContext(ProductsContext).productNames.length
             return (
                 <h3>
                     <span>Products Count : </span>
@@ -57,15 +73,7 @@
             )
         }
 
-        const App = () => {
-            const [productsList, setProductsList] = React.useState([])
-            return (
-                <div>
-                    <ProductsCount count={productsList.length} />
-                    <Products onListChange={ productsList => setProductsList(productsList) }/>
-                </div>
-            )
-        }
+       
 
         ReactDOM.render(
             <App/>

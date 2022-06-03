@@ -96,3 +96,17 @@ Side Effects
 
 Pure Function
     Function whose invocation can be replaced with the result of the function without affecting the final outcome
+
+Context
+    Used to share data across component hierarchy without needing to pass the data as props
+
+State
+    UI State
+        Any data that supports the UI responsibilities of the component
+        It is highly UNLIKELY that a change in this data will have to be recognized by other parts of the application
+        Feel free to keep this data in the component state
+
+    App State
+        Any data the supports the core logic of the application
+        It is highly LIKELY that a change in this data will have to be recognized by other parts of the application
+        DONOT keep this data in the component state
