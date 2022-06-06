@@ -12,7 +12,10 @@
     <script type="text/babel">
         /* 
             01. initial version
-        
+            02. remove the dependency on the store in the component
+            03. introducing 'action creators'
+            04. simplify passing the 'action creators' to the component (part-1)
+            05. simplify passing the 'action creators' to the component (part-2)
         */
         function spinnerReducer(currentState = 100, action) {
             if (action.type === 'INCREMENT') {
@@ -26,16 +29,18 @@
 
         const store = StateManager.createStore(spinnerReducer);
 
-        const Spinner = ({store}) => {
-            const value = store.getState();
+        const Spinner = ({value, dispatch, decrement, increment}) => {
+            
             const onDecrementClick = () => {
-                const action = { type: 'DECREMENT' };
-                store.dispatch(action);
+                const action = decrement();
+                dispatch(action);
             };
+
             const onIncrementClick = () => {
-                const action = { type: 'INCREMENT' };
-                store.dispatch(action);
-            }
+                const action = increment();
+                dispatch(action);
+            };
+
             return (
                 <div>
                     <h1>Spinner</h1>
@@ -47,9 +52,25 @@
             )
         }
 
+        const spinnerActionCreators = {
+            decrement(){
+                const action = { type: 'DECREMENT' };
+                return action;
+            },
+            increment(){
+                const action = { type: 'INCREMENT' };
+                return action;
+            }
+        }
+
         function renderApp(){
+            const value = store.getState();
             ReactDOM.render(
-                <Spinner store={store}/>, 
+                <Spinner 
+                    value={value} 
+                    dispatch={store.dispatch} 
+                    {...spinnerActionCreators}
+                />, 
                 document.getElementById('root')
             )
         }
