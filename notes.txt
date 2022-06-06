@@ -110,3 +110,10 @@ State
         Any data the supports the core logic of the application
         It is highly LIKELY that a change in this data will have to be recognized by other parts of the application
         DONOT keep this data in the component state
+
+Assignment:
+    Solve the Products Management problem using useReducer hook (dont worry about displaying the count outside the component)
+    Use Cases
+        1. adding products
+        2. listing products
+        3. removing products

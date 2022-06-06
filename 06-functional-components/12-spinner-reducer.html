@@ -11,28 +11,35 @@
     <script type="text/babel">
 
         function spinnerReducer(currentState, action){
-            if (action === 'INCREMENT'){
-                return currentState + 1;
+            if (action.type === 'INCREMENT'){
+                return currentState + action.delta;
             }
-            if (action === 'DECREMENT'){
-                return currentState - 1;
+            if (action.type === 'DECREMENT'){
+                return currentState - action.delta;
             }
             return currentState;
         }
 
         const Spinner  = () => {
-            const [ count, dispatch] = React.useReducer(spinnerReducer, 100)
+            const [ delta, setDelta ] = React.useState(0);
+            const [ count, dispatch ] = React.useReducer(spinnerReducer, 0);
+            
             const onDecrementClick = () => {
-                dispatch('DECREMENT');
+                const action = { type : 'DECREMENT', delta : delta }
+                dispatch(action);
             };
             const onIncrementClick = () => {
-                dispatch('INCREMENT');
+                const action = { type : 'INCREMENT', delta : delta }
+                dispatch(action);
             };
             return (
                 <div>
                     <h3>Spinner</h3>
+                    <label>Delta :</label>
+                    <input type="number" onChange={ evt => setDelta(parseInt(evt.target.value))} />
+                    <br/>
                     <button onClick={onDecrementClick}> Decrement </button>
-                    <div>{count}</div>
+                    <span> [ {count} ] </span>
                     <button onClick={onIncrementClick}> Increment </button>
                 </div>
             )

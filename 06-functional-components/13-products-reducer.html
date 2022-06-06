@@ -10,37 +10,41 @@
     <script src="react-dom.development.js"></script>
     <script type="text/babel">
         
-        const ProductsContext = React.createContext();
+         function productsReducer(currentState, action){
+            if (action.type === 'PRODUCTS_ADD'){
+                const newState = [...currentState, action.payload];
+                return newState;
+            }
+            if (action.type === 'PRODUCTS_REMOVE'){
+                const newState = currentState.filter(p => p !== action.payload);
+                return newState
+            }
+            return currentState;
+         }
 
          const App = () => {
-            const [productNames, setProductNames] = React.useState(['Pen', 'Pencil', 'Marker', 'Scribble-Pad'])
-
-            const addNew = (newProductName) => {
-                setProductNames([...productNames, newProductName])
-            };
-
-            const remove = (productToRemove) => {
-                setProductNames(productNames.filter(pn => pn !== productToRemove))
-            };
-
-            
-
-            const contextValue = { productNames, addNew, remove };
-
+            const [products, dispatch] = React.useReducer(productsReducer, [])
             return (
-                <ProductsContext.Provider value={contextValue}>
+                
                     <div>
-                        <ProductsCount  />
-                        <Products />
+                        <ProductsCount count={products.length}/>
+                        <Products productNames={products} dispatch={dispatch}/>
                     </div>
-                </ProductsContext.Provider>
+                
             )
         }
-        const Products = () => {
+
+        const Products = ({productNames, dispatch}) => {
            
             const [newProductName, setNewProductName] = React.useState('');
 
-            const { productNames, addNew, remove } = React.useContext(ProductsContext);
+            const addNew = () => {
+                dispatch({type : 'PRODUCTS_ADD', payload : newProductName});
+            };
+
+            const remove = (productToRemove) => {
+                dispatch({type : 'PRODUCTS_REMOVE', payload : productToRemove});
+            }
            
             const productItems = productNames.map((productName, index) => (
                 <li key={index}>
@@ -65,8 +69,7 @@
             )
         }
 
-        const ProductsCount = () => {
-            const count = React.useContext(ProductsContext).productNames.length
+        const ProductsCount = ({count}) => {
             return (
                 <h3>
                     <span>Products Count : </span>
