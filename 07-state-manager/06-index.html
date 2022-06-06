@@ -16,7 +16,9 @@
             03. introducing 'action creators'
             04. simplify passing the 'action creators' to the component (part-1)
             05. simplify passing the 'action creators' to the component (part-2)
+            06. introducing 'spinner action dispatchers'
         */
+
         function spinnerReducer(currentState = 100, action) {
             if (action.type === 'INCREMENT') {
                 return currentState + action.delta;
@@ -29,29 +31,18 @@
 
         const store = StateManager.createStore(spinnerReducer);
 
-        const Spinner = ({value, dispatch, decrement, increment}) => {
+        const Spinner = ({value, decrement, increment}) => {
             
             const [delta, setDelta] = React.useState(0);
-
-            const onDecrementClick = () => {
-                const action = decrement(delta);
-                dispatch(action);
-            };
-
-            const onIncrementClick = () => {
-                const action = increment(delta);
-                dispatch(action);
-            };
-
             return (
                 <div>
                     <h1>Spinner</h1>
                     <hr/>
                     <label> Delta : </label>
                     <input type="number" onChange={evt => setDelta(parseInt(evt.target.value))}/>
-                    <button onClick={onDecrementClick}>Decrement</button>
+                    <button onClick={() => decrement(delta)}>Decrement</button>
                     <span> [ {value} ] </span>
-                    <button onClick={onIncrementClick}>Increment</button>
+                    <button onClick={() => increment(delta)}>Increment</button>
                 </div>
             )
         }
@@ -65,15 +56,30 @@
                 const action = { type: 'INCREMENT', delta : delta };
                 return action;
             }
+        };
+
+        function bindActionCreators(spinnerActionCreators, dispatch){
+            const spinnerActionDispatchers = {
+                 decrement(delta) {
+                    const action = spinnerActionCreators.decrement(delta);
+                    dispatch(action);
+                },
+                increment(delta) {
+                    const action = spinnerActionCreators.increment(delta);
+                    dispatch(action);
+                }
+            };
+            return spinnerActionDispatchers;
         }
+
+        const spinnerActionDispatchers = bindActionCreators(spinnerActionCreators, store.dispatch);
 
         function renderApp(){
             const value = store.getState();
             ReactDOM.render(
                 <Spinner 
                     value={value} 
-                    dispatch={store.dispatch} 
-                    {...spinnerActionCreators}
+                    {...spinnerActionDispatchers}
                 />, 
                 document.getElementById('root')
             )
