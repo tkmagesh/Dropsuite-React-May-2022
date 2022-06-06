@@ -17,6 +17,8 @@
             04. simplify passing the 'action creators' to the component (part-1)
             05. simplify passing the 'action creators' to the component (part-2)
             06. introducing 'spinner action dispatchers'
+            07. generalizing 'bindActionCreators'
+            08. refactoring 'bindActionCreators' to state-manager.js
         */
 
         function spinnerReducer(currentState = 100, action) {
@@ -58,21 +60,7 @@
             }
         };
 
-        function bindActionCreators(spinnerActionCreators, dispatch){
-            const spinnerActionDispatchers = {
-                decrement(delta) {
-                    const action = spinnerActionCreators.decrement(delta);
-                    dispatch(action);
-                },
-                increment(delta) {
-                    const action = spinnerActionCreators.increment(delta);
-                    dispatch(action);
-                }
-            };
-            return spinnerActionDispatchers;
-        }
-
-        const spinnerActionDispatchers = bindActionCreators(spinnerActionCreators, store.dispatch);
+        const spinnerActionDispatchers = StateManager.bindActionCreators(spinnerActionCreators, store.dispatch);
 
         function renderApp(){
             const value = store.getState();
