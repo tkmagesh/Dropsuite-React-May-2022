@@ -1,0 +1,169 @@
+<!-- Use multiple reducers using combineReducers -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <script src="babel.min.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="state-manager.js"></script>
+    <script type="text/babel">
+
+        //Reducers
+        function productsReducer(currentState = [], action) {
+            if (action.type === 'PRODUCTS_ADD') {
+                const newState = [...currentState, action.payload];
+                return newState;
+            }
+            if (action.type === 'PRODUCTS_REMOVE') {
+                const newState = currentState.filter(p => p !== action.payload);
+                return newState
+            }
+            return currentState;
+        }
+
+        function spinnerReducer(currentState = 100, action) {
+            if (action.type === 'INCREMENT') {
+                return currentState + action.delta;
+            }
+            if (action.type === 'DECREMENT') {
+                return currentState - action.delta;
+            }
+            return currentState;
+        }
+
+        //root reducer
+        const rootReducer = StateManager.combineReducers({
+            spinnerState : spinnerReducer,
+            productsState : productsReducer
+        })
+
+        //Store
+        const store = StateManager.createStore(rootReducer);
+
+        //Action Creators
+        const productActionCreators = {
+            addNew(newProductName){
+                return { type : 'PRODUCTS_ADD', payload : newProductName }
+            },
+            remove(productToRemove){
+                return { type : 'PRODUCTS_REMOVE', payload : productToRemove }
+            }
+        };
+         const spinnerActionCreators = {
+            decrement(delta) {
+                const action = { type: 'DECREMENT', delta: delta };
+                return action;
+            },
+            increment(delta) {
+                const action = { type: 'INCREMENT', delta: delta };
+                return action;
+            }
+        };
+
+        //action dispatchers
+        const productActionDispatchers = StateManager.bindActionCreators(productActionCreators, store.dispatch);
+        const spinnerActionDispatchers = StateManager.bindActionCreators(spinnerActionCreators, store.dispatch);
+
+
+        //Components
+        const ProductsApp = ({products, addNew, remove}) => {
+            return (
+
+                <div>
+                    <ProductsCount count={products.length} />
+                    <Products productNames={products} {...{addNew, remove}} />
+                </div>
+
+            )
+        }
+
+        const Products = ({ productNames, addNew, remove }) => {
+
+            const [newProductName, setNewProductName] = React.useState('');
+
+            const productItems = productNames.map((productName, index) => (
+                <li key={index}>
+                    <span>{productName}</span>
+                    <span> [<button onClick={() => remove(productName)}> X </button>] </span>
+                </li>)
+            );
+
+            return (
+                <div>
+
+                    <label for="">Product Name :</label>
+                    <input
+                        type="text"
+                        value={newProductName}
+                        onChange={evt => setNewProductName(evt.target.value)} />
+                    <button onClick={() => addNew(newProductName)}>Add New</button>
+                    <ul>
+                        {productItems}
+                    </ul>
+                </div>
+            )
+        }
+
+        const ProductsCount = ({ count }) => {
+            return (
+                <h3>
+                    <span>Products Count : </span>
+                    <span>[ {count} ]</span>
+                </h3>
+            )
+        }
+
+        const Spinner = ({ value, decrement, increment }) => {
+
+            const [delta, setDelta] = React.useState(0);
+            return (
+                <div>
+                    <h1>Spinner</h1>
+                    <hr />
+                    <label> Delta : </label>
+                    <input type="number" onChange={evt => setDelta(parseInt(evt.target.value))} />
+                    <button onClick={() => decrement(delta)}>Decrement</button>
+                    <span> [ {value} ] </span>
+                    <button onClick={() => increment(delta)}>Increment</button>
+                </div>
+            )
+        }
+
+
+        function renderApp(){
+            const storeState = store.getState();
+            const productNames = storeState.productsState;
+            const value = storeState.spinnerState;
+
+            ReactDOM.render(
+                <div>
+                    <ProductsApp 
+                        products={productNames} 
+                        {...productActionDispatchers} 
+                    />
+                    <Spinner
+                        value={value}
+                        {...spinnerActionDispatchers}
+                    />
+                </div>
+                , document.getElementById('root'));
+        }
+        renderApp();
+        store.subscribe(renderApp);
+    </script>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <hr />
+    <div id="root">
+
+    </div>
+</body>
+
+</html>
