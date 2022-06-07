@@ -133,3 +133,24 @@ ES6 modules
     1. Everything defined in a JS/TS/JSX/TSX file is considered PRIVATE by default
     2. Any entity that need to be made public should be explicitly EXPORTED
     3. Any entity from another file has to be explicitly IMPORTED to use
+
+To install redux
+    yarn add redux
+
+    /spinner
+        /actions
+            increment.js
+            decrement.js
+            index.js
+        /reducers
+            spinnerReducer.js
+        /index.js
+            Spinner component
+    /store
+        index.js
+    
+    /index.js
+        import the action creators
+        import the store
+        create action dispatchers
+        render the component
