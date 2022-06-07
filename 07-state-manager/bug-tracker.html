@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            margin-left: 50px;
+        }
+        section{
+            margin-bottom: 10px;
+        }
+        .stats, .bugname {
+            font-size: 18pt;
+        }
+        .closed{
+            color : red;
+            text-decoration: line-through;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .bugname{
+            cursor: pointer;
+        }
+        ol {
+            width : 500px;
+            list-style: none;
+            -webkit-padding-start: 0px;
+        }
+        li{
+            margin-bottom: 10px;
+            padding: 10px;
+            border : 1px solid gray;
+            border-radius: 5px;
+            background-color: #e7e7e7;
+        }
+
+    </style>
+    <!-- 
+        1. Add new bugs
+        2. List the added bugs
+        3. Remove any bug
+        4. Toggle the 'closed' status of any bug
+        5. Remove all closed bugs
+        6. Display stats ( # of closed bugs / total # of bugs )
+        7. Sort the bugs (later)
+     -->
+
+     <script src="babel.min.js"></script>
+     <script src="react.development.js"></script>
+     <script src="react-dom.development.js"></script>
+     <script src="redux.js"></script>
+
+     <script type="text/babel">
+         let initialState = [
+             { id : 1, name : 'Bug - 1', isClosed : false, createdAt : Date()},
+             { id: 2, name: 'Bug - 2', isClosed: true, createdAt: Date() },
+             { id: 3, name: 'Bug - 3', isClosed: true, createdAt: Date() },
+         ]
+
+         function bugsReducer(currentState = initialState, action){
+             switch (action.type) {
+                 case 'BUGS_ADD':
+                     return [...currentState, action.payload];
+                     break;
+             
+                 default:
+                     break;
+             }
+             return currentState;
+         }
+
+         var _currentBugId = 3;
+         const bugActionCreators = {
+             addNew(newBugName){
+                 const action = {
+                     type : 'BUGS_ADD',
+                     payload : {
+                        id : ++_currentBugId,
+                        name : newBugName,
+                        isClosed: false,
+                        createdAt : Date()
+                    }
+                 };
+                 return action;
+             }
+         }
+
+         const Bugs = ({bugs, addNew}) => {
+            const bugItems = bugs.map(bug => (
+                <li key={bug.id}>
+                    <span className={ "bugname " + (bug.isClosed ? "closed" : "")}>{bug.name}</span>
+                    <div className="datetime">{bug.createdAt}</div>
+                    <button>Remove</button>
+                </li>
+            ))
+             return(
+                <>
+                     <h3>Bugs</h3>
+                     <BugStats bugs={bugs} />             
+                     <section className="sort">
+                         <label htmlFor="">Order By :</label>
+                         <select name="" id="">
+                             <option value=""></option>
+                             <option value=""></option>
+                         </select>
+                         <label htmlFor="">Descending ? :</label>
+                         <input type="checkbox" name="" id="" />
+                     </section>                     
+                     <BugEdit addNew={addNew} />      
+                     <section className="list">
+                         <ol>   
+                             {bugItems}
+                         </ol>
+                         <button>Remove Closed</button>
+                     </section>
+                </>
+             )
+         }
+
+         const BugStats = ({bugs}) => {
+             const closedCount = bugs.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0);
+             return (
+                  <section className="stats">
+                     <span className="closed">{closedCount}</span>
+                     <span> / </span>
+                     <span>{bugs.length}</span>
+                 </section>     
+             )
+         }
+         const BugEdit = ({addNew}) => {
+             const [newBugName, setNewBugName] = React.useState('');
+             return (
+                 <section className="edit">
+                     <label htmlFor="">Bug Name :</label>
+                     <input type="text" onChange={evt => setNewBugName(evt.target.value)} />
+                     <button onClick={() => addNew(newBugName)}>Add New</button>
+                 </section>  
+             )
+         }
+
+         const store = Redux.createStore(bugsReducer);
+         const bugActionDispatchers = Redux.bindActionCreators(bugActionCreators, store.dispatch);
+
+         function renderApp(){
+             const bugs = store.getState();
+            ReactDOM.render(<Bugs bugs={bugs} {...bugActionDispatchers}/>, document.getElementById('root'))
+         }
+
+         renderApp();
+
+         store.subscribe(renderApp);
+
+     </script>
+</head>
+<body>
+    <h1>Bug Tracker</h1>
+    <hr>
+    <div id="root"></div>
+   
+</body>
+</html>
