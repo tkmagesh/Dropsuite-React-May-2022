@@ -117,3 +117,19 @@ Assignment:
         1. adding products
         2. listing products
         3. removing products
+
+
+Assignment:
+    Create your own version of useReducer hook
+    
+
+To install yarn (package manager)
+    npm install -g yarn
+
+To create a react application
+    yarn create react-app bug-tracker-app
+
+ES6 modules
+    1. Everything defined in a JS/TS/JSX/TSX file is considered PRIVATE by default
+    2. Any entity that need to be made public should be explicitly EXPORTED
+    3. Any entity from another file has to be explicitly IMPORTED to use
