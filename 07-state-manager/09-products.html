@@ -37,6 +37,7 @@
 
         const productActionDispatchers = StateManager.bindActionCreators(productActionCreators, store.dispatch);
 
+        //Container / Smart (interfaces with the redux infrastructure & these will not interact with the user)
         const ProductsApp = ({products, addNew, remove}) => {
             return (
 
@@ -48,6 +49,7 @@
             )
         }
 
+        //Presentation / Dumb (receive data and action dispatchers from the Container component and interacts with the user)
         const Products = ({ productNames, addNew, remove }) => {
 
             const [newProductName, setNewProductName] = React.useState('');
