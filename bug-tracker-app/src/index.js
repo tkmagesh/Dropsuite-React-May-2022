@@ -1,24 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 
 import { bindActionCreators } from 'redux';
-import * as spinnerActionCreators from './spinner/actions';
-import store from './store'
-import Spinner from './spinner';
+import * as bugActionCreators from './bugs/actions';
+import Bugs from './bugs';
+import store from './store';
 
-const spinnerActionDispatchers = bindActionCreators(spinnerActionCreators, store.dispatch);
+const bugActionDispatchers = bindActionCreators(bugActionCreators, store.dispatch);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function renderApp(){
-    const value = store.getState();
+    const bugs = store.getState();
     root.render(
-        <Spinner 
-            value={value} 
-            {...spinnerActionDispatchers}
-        />
+        <Bugs bugs={bugs} {...bugActionDispatchers} />
     );
 }
 renderApp()

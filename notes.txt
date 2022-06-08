@@ -122,7 +122,19 @@ Assignment:
 Assignment:
     Create your own version of useReducer hook
     
+    function useReducer(reducer, currentState){
+        const [state, setState] = useState(currentState);
+        const dispatch = useCallback(
+            action => {
+                const newState = reducer(state, action);
+                setState(newState);
+            },
+            [state]
+        );
+        return [state, dispatch];
+    }
 
+    
 To install yarn (package manager)
     npm install -g yarn
 
