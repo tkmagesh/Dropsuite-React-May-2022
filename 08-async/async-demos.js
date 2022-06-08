@@ -73,5 +73,24 @@
     window['addAsyncPromiseClient2'] = addAsyncPromiseClient2
     
 
+    function divide(x,y){
+        return new Promise(function(resolveFn, rejectFn){
+            setTimeout(function(){
+                if (y === 0) {
+                    return rejectFn(new Error('Cannot divide by zero'))
+                }
+                return resolveFn(x / y)
+            },5000);
+        })
+    }
+
+    async function divideClient(x,y){
+        try {
+            let result = await divide(x,y)
+            console.log('result = ', result);
+        } catch(err){
+            console.log('something went wrong!', err);
+        }
+    }
 })();
 
