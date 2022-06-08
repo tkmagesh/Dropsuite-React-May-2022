@@ -166,3 +166,6 @@ To install redux
         import the store
         create action dispatchers
         render the component
+
+Middleware
+    to encapsulate any logic that has to be applied across actions

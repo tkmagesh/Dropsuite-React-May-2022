@@ -1,7 +1,8 @@
 
 export function remove(bug){
-    return {
+    const action = {
         type : 'BUGS_REMOVE',
         payload : bug
     }
+    return action;
 }
