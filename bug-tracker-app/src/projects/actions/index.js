@@ -1,5 +1,5 @@
 
-let _currentProjectId = 0;
+let _currentProjectId = 2;
 
 export function addNew(projectName){
     const newProject = { id : ++_currentProjectId, name : projectName };
