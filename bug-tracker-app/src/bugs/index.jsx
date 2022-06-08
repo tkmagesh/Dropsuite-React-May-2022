@@ -4,12 +4,18 @@ import BugStats from './components/BugStats';
 import BugSort from './components/BugSort';
 import BugEdit from './components/BugEdit';
 import BugList from './components/BugList';
+import { useSelector, useDispatch } from 'react-redux';
+import * as bugActionCreators from './actions';
+import { bindActionCreators } from 'redux';
 
+const Bugs = () => {
 
-const Bugs = ({bugs, load, addNew, toggle, remove, removeClosed}) => {
+    const bugs = useSelector(storeState => storeState.bugsState);
+    const { addNew, load, toggle, remove, removeClosed }  = bindActionCreators(bugActionCreators, useDispatch());
+
     useEffect(() => {
         load()
-    }, [load]);
+    }, []);
     
     return(
         <>
