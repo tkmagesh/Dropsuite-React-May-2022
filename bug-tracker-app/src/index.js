@@ -19,7 +19,7 @@ root.render(
     <Provider store={store}>
         <div>
             <Projects/>
-            {/* <Bugs/> */}
+            <Bugs/>
         </div>
     </Provider>
 );

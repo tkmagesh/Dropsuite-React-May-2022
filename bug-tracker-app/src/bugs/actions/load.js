@@ -1,4 +1,5 @@
 
+/* 
 export function load(){
     let initialState = [
         { id : 1, name : 'Bug - 1', isClosed : false, createdAt : Date(), projectId : 1},
@@ -9,4 +10,14 @@ export function load(){
         type : 'BUGS_INIT',
         payload : initialState
     }
+} */
+import * as bugApi from '../services/bugApi';
+
+export const load = () => async dispatch => {
+    const bugs = await bugApi.getAll()
+    const action =  {
+        type : 'BUGS_INIT',
+        payload : bugs
+    }
+    dispatch(action);
 }
