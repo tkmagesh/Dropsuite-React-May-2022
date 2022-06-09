@@ -1,27 +1,5 @@
 {
-  "bugs": [
-    {
-      "id": 2,
-      "name": "A",
-      "isClosed": false,
-      "createdAt": "2022-05-27T12:43:18.163Z",
-      "projectId": 1
-    },
-    {
-      "id": 5,
-      "name": "Server communication failure",
-      "createdAt": "2022-05-27T12:43:12.911Z",
-      "projectId": 2,
-      "isClosed": false
-    },
-    {
-      "id": 6,
-      "name": "user access denied for administrator",
-      "createdAt": "2022-06-09T09:06:06.621Z",
-      "projectId": 3,
-      "isClosed": true
-    }
-  ],
+  "bugs": [],
   "projects": [
     {
       "id": 1,
