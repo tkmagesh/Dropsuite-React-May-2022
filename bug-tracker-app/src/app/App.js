@@ -3,10 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { loadApp } from './actions';
 import { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-function App({children}) {
+import Home from '../home'
+import Bugs from '../bugs';
+import Projects from '../projects';
+
+
+function App() {
   const appState = useSelector(({appState}) => appState)
-  console.log(appState);
+
   const dispatch = useDispatch();
   
   useEffect( () => {
@@ -17,7 +28,36 @@ function App({children}) {
     <div className="App">
       <h1>My App</h1>
       <div>{appState.error}</div>
-      {appState.loaded ? children : <h3>Loading....</h3>}
+      {!appState.loaded ? <h3>Loading....</h3> :
+        <Router>
+          <div>
+              <div>
+                <span>
+                  [ <Link to="/">Home</Link> ]
+                </span>
+                <span>
+                  [ <Link to="/projects">Projects</Link> ]
+                </span>
+                <span>
+                  [ <Link to="/bugs">Bugs</Link> ]
+                </span>
+              
+            </div>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/projects">
+                <Projects />
+              </Route>
+              <Route path="/bugs">
+                <Bugs />
+              </Route>
+            
+            </Switch>
+          </div>
+        </Router>
+      }
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const serviceEndPoint = 'http://localhost:5000/bugs'
+const serviceEndPoint = 'http://localhost:3030/bugs'
 
 export async function getAll(){
     const response = await axios.get(serviceEndPoint);

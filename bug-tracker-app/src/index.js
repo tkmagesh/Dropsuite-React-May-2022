@@ -14,12 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     
 root.render(
     <Provider store={store}>
-        <div>
-            <App>
-                <Projects/>
-                <Bugs/>
-            </App>
-        </div>
+        <App/>
     </Provider>
 );
 
