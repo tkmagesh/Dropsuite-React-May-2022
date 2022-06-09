@@ -9,6 +9,10 @@ import Bugs from './bugs';
 import Projects from './projects'
 import { Provider } from 'react-redux';
 
+//DO NOT DO THIS IN YOUR PRODUCTION APPLICATION
+import axios from 'axios';
+window['axios'] = axios;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
     
 root.render(

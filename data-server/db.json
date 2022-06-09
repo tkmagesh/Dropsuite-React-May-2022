@@ -15,20 +15,18 @@
       "projectId": 1
     },
     {
-      "id": 3,
-      "name": "C",
+      "id": 5,
+      "name": "Server communication failure",
       "isClosed": true,
-      "createdAt": "2022-05-27T12:43:21.242Z",
-      "projectId": 1,
-      "projectName": "Bug Tracker"
+      "createdAt": "2022-05-27T12:43:12.911Z",
+      "projectId": 2
     },
     {
-      "id": 4,
-      "name": "D",
+      "id": 6,
+      "name": "user access denied for administrator",
       "isClosed": true,
-      "createdAt": "2022-05-27T12:43:24.176Z",
-      "projectId": 1,
-      "projectName": "Bug Tracker"
+      "createdAt": "2022-06-09T09:06:06.621Z",
+      "projectId": 3
     }
   ],
   "projects": [
