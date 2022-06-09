@@ -209,3 +209,9 @@ console.log(updatedBug)
 
 //DELETE
 await axios.delete('http://localhost:3030/bugs/3')
+
+Implement the following operation for bugs (with server communication)
+    Listing the bugs
+    Adding a new bug
+    Toggling an existing bug
+    Removing an existing bug
