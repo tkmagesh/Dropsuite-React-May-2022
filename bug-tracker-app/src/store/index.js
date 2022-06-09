@@ -2,12 +2,15 @@ import { combineReducers, createStore, applyMiddleware} from 'redux'
 /* import spinnerReducer from '../spinner/reducers/spinnerReducer'; */
 import bugsReducer from '../bugs/reducers/bugsReducer';
 import projectsReducer from '../projects/reducers/projectsReducer';
+import appReducer from '../app/reducers/appReducer';
+
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     bugsState : bugsReducer,
-    projectsState : projectsReducer
+    projectsState : projectsReducer,
+    appState : appReducer
 });
 
 /* 

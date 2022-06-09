@@ -8,18 +8,17 @@ import store from './store';
 import Bugs from './bugs';
 import Projects from './projects'
 import { Provider } from 'react-redux';
-
-//DO NOT DO THIS IN YOUR PRODUCTION APPLICATION
-import axios from 'axios';
-window['axios'] = axios;
-
+import App from './app/App';
+import ErrorBoundary from './errors/ErrorBoundary';
 const root = ReactDOM.createRoot(document.getElementById('root'));
     
 root.render(
     <Provider store={store}>
         <div>
-            <Projects/>
-            <Bugs/>
+            <App>
+                <Projects/>
+                <Bugs/>
+            </App>
         </div>
     </Provider>
 );

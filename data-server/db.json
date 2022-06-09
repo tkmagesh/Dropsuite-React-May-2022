@@ -1,5 +1,13 @@
 {
-  "bugs": [],
+  "bugs": [
+    {
+      "id": 1,
+      "name": "Server communication failure",
+      "isClosed": false,
+      "createdAt": "Thu Jun 09 2022 17:25:11 GMT+0530 (India Standard Time)",
+      "projectId": 3
+    }
+  ],
   "projects": [
     {
       "id": 1,

@@ -8,19 +8,15 @@ import { useDispatch } from 'react-redux';
 import * as bugActionCreators from './actions';
 import { bindActionCreators } from 'redux';
 import useBugsSelector from './utils/useBugsSelector';
+import ErrorBoundary from '../errors/ErrorBoundary';
 
 const Bugs = () => {
 
     const { addNew, load, toggle, remove, removeClosed }  = bindActionCreators(bugActionCreators, useDispatch());
     const { bugs, projects } = useBugsSelector();
-
-    useEffect(() => {
-        load()
-    }, []);
-    
+ 
     return(
         <>
-            <h3>Bugs</h3>
             <BugStats bugs={bugs} />             
             <BugSort/>                
             <BugEdit addNew={addNew} projects={projects} />      
@@ -28,4 +24,11 @@ const Bugs = () => {
         </>
     )
 }
-export default Bugs;
+export default () => (
+    <>
+        <h3>Bugs</h3>
+        <ErrorBoundary>
+            <Bugs/>
+        </ErrorBoundary>
+    </>
+)
