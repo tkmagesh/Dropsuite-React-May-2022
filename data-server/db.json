@@ -1,0 +1,48 @@
+{
+  "bugs": [
+    {
+      "id": 1,
+      "name": "Z",
+      "isClosed": false,
+      "createdAt": "2022-05-27T12:43:12.911Z",
+      "projectId": 1
+    },
+    {
+      "id": 2,
+      "name": "A",
+      "isClosed": false,
+      "createdAt": "2022-05-27T12:43:18.163Z",
+      "projectId": 1
+    },
+    {
+      "id": 3,
+      "name": "C",
+      "isClosed": true,
+      "createdAt": "2022-05-27T12:43:21.242Z",
+      "projectId": 1,
+      "projectName": "Bug Tracker"
+    },
+    {
+      "id": 4,
+      "name": "D",
+      "isClosed": true,
+      "createdAt": "2022-05-27T12:43:24.176Z",
+      "projectId": 1,
+      "projectName": "Bug Tracker"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Bug Tracker"
+    },
+    {
+      "id": 2,
+      "name": "Project Management"
+    },
+    {
+      "id": 3,
+      "name": "Time Tracker"
+    }
+  ]
+}
