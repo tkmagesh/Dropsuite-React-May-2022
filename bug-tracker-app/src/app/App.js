@@ -16,6 +16,7 @@ function App({children}) {
   return (
     <div className="App">
       <h1>My App</h1>
+      <div>{appState.error}</div>
       {appState.loaded ? children : <h3>Loading....</h3>}
     </div>
   );

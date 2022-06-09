@@ -1,9 +1,16 @@
 const initialState = {
-    loaded : false
+    loaded : false,
+    error : ''
 }
 export default function appReducer(currentState = initialState, action) {
     if (action.type === 'APP_LOADED'){
-        return { loaded : true}
+        return { ...currentState, loaded : true}
+    }
+    if (action.type === 'APP_ERROR'){
+        return { ...currentState, error : action.payload}
+    }
+    if (action.type === 'APP_ERROR_CLEAR'){
+        return { ...currentState, error : ''}
     }
     return currentState;
 }
